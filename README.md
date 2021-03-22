@@ -1,5 +1,3 @@
-# HTML & CSS
-
 ## **O que é HTML e para que serve?**
 
 HTML é a abreviação de **H**yper**T**ext **M**arkup **L**anguage que significa: Linguagem de marcação de hipertexto.
@@ -123,7 +121,9 @@ Escrever uma seção com 2 parágrafos, utilizando ênfase e importância para a
 - use a tag <b> para importância;
 ```
 
-## Como criar um documento
+## Qual objetivo e como criar um documento HTML
+
+O seu principal objetivo é estruturar e apresentar a um texto ou conteúdo com significado (semântica).
 
 Aqui temos um template padrão de um documento HTML.
 
@@ -155,3 +155,248 @@ Conhecendo o template padrão, vamos criar um documento HTML do zero,
 - use a tag `<title>` para definir o título da página;
 - use a tag `<h1>` para definir o título do conteúdo;
 ```
+
+## Semântica
+
+Como já sabemos, precisamos dar significado ao nosso conteúdo e, por meio de nossas *tags* e *atributos*, fazemos isto. Alguns exemplos de uso semântico das tags:
+
+- `<main>` → Representa o conteúdo principal da nossa página, é importante termos apenas um elemento deste por página;
+- `<section>` → Representa uma seção de conteúdo da nossa página, podem ter várias em um único documento;
+- `<header>` → Representa o cabeçalho de nossa página;
+- `<footer>` → Representa o rodapé de nossa página;
+- `<p>` → Representa um parágrafo;
+- `<h1>, <h2>, <h3>, ...` → Representam um título, de acordo com o nível escolhido;
+- `<div>` → Representa uma subdivisão sem muita semântica, , portanto devemos ter cuidado ao utiliza-la.
+
+Existem inúmeras outras *tags* com funcionalidades diferentes, portanto devemos analisar corretamente qual a semântica queremos dar para cada conteúdo de nossa página.
+
+## Hyperlinks
+
+Elemento que serve para fazer a navegação entre conteúdos e páginas em um documento HTML.
+
+Anatomia e modos de uso: 
+
+```html
+Envia para a URL informada (na mesma aba)... 
+<a href="https://google.com">Vai para o Google</a>
+
+Envia para a URL informada (em uma nova aba)...
+<a href="https://google.com" target="_blank">Abre o Google</a>
+
+---
+
+Envia para outra página HTML presente na pasta do projeto...
+<a href="./sobre.html">Sobre nós</a>
+
+---
+
+Envia para o conteúdo, através de seu ID.
+<a href="#contato">Contato</a>
+
+<section id="sobre">...</section>
+<section id="produto">...</section>
+<section id="contato">...</section>
+
+É importante notar que para esse caso o `id` precisa estar na mesma página HTML do hyperlink.
+```
+
+### Praticando III
+
+```html
+Crie um projeto contendo:
+
+- 2 arquivos no diretório principal (index.html e about.html)
+- No arquivo index.html:
+	- Adicione no conteúdo PRINCIPAL (use a tag <main>), 2 parágrafos.
+	- Adicione um conteúdo secundário (use a tag <section>), adicione o título "Sobre", 1 parágrafo e um 1 hyperlink enviando para a página about.html.
+- No arquivo about.html:
+	- Adicione 3 seções com `id`'s diferentes e no topo da página, dentro do <header> adicione um link para cada seção respectivamente.
+	Exemplo:
+	<header>
+		<a href="#sobre">Saiba Mais</a>
+		<a href="#produto">Nosso Produto</a>
+		<a href="#contato">Fale Conosco</a>
+	</header>
+
+	<section id="sobre">...</section>
+	<section id="produto">...</section>
+	<section id="contato">...</section>
+```
+
+# Estilizando nosso documento do CSS
+
+## O que significa CSS?
+
+- Acrônimo para "Cascading Style Sheets", que significa "Folha de Estilo em Cascata"
+- Código para criar estilos no HTML;
+- HTML é a estrutura, e o CSS é a beleza;
+- Não é uma linguagem de programação, é uma linguagem de estilização.
+
+Exemplo:
+
+[https://codepen.io/gustavo-flor/pen/bGgGpzO](https://codepen.io/gustavo-flor/pen/bGgGpzO)
+
+Neste exemplo podemos verificar que com a ajuda do CSS um simples `h1` e `p` tiveram seus estilos totalmente modificados, vamos entender agora como começar a utilizar o CSS.
+
+## Anatomia
+
+Como devemos escrever o CSS para que nosso HTML entenda e consiga ser estilizado.
+
+```css
+seletor {
+	propriedade: valor;
+	propriedade: valor;
+	...
+}
+
+---
+
+h1 {
+	color: blue;
+	font-size: 24px;
+}
+```
+
+### Seletores
+
+Os seletores, servem para filtrar e selecionar os elementos que queremos estilizar, e temos inúmeras formas de selecionar um elemento através deles, vamos mostrar aqui os mais comuns:
+
+- Tag → Podemos selecionar um elemento através de sua tag;
+- Classe → Podemos selecionar um elemento através do seu atributo "class";
+- Id → Podemos selecionar um elemento através do seu atributo "id";
+
+```
+/* Tag → Podemos selecionar um elemento através de sua tag */
+HTML:
+<h1>...</h1>
+
+CSS:
+h1 {...}
+
+/* Classe → Podemos selecionar um elemento através do seu atributo "class", para isso devemos colocar um "." e o nome da classe */
+HTML:
+<div class="carro">...</div>
+
+CSS:
+.carro {...}
+
+/* Id → Podemos selecionar um elemento através do seu atributo "id", para isso devemos colocar um "#" e o identificador */
+HTML:
+<div id="bloco">...</div>
+
+CSS:
+#bloco {...}
+
+/* Children → Podemos selecionar elementos filhos através de seus elementos pais, basta demonstrarmos a hierarquia do item pai até o item filho, deste forma estilizamos apenas elementos que seguem essa hierarquia */
+HTML:
+<section>
+	<p>Olá Mundo</p>
+</section>
+
+CSS:
+section p {...}
+```
+
+É importante notar que podemos mesclar os seletores (sempre na ordem tag → id → class).
+
+```html
+<section id="produto" class="card">...</section>
+```
+
+```css
+#produto.card {...} /* Correto */
+
+#produtosection {...} /* Errado */
+
+.card#produto {...} /* Errado */
+```
+
+### Propriedades e Valores
+
+As propriedades, servem para definir o que será estilizado e os valores se referem a como será feita a estilização, cada propriedade tem seus determinados tipos de valores esperados.
+
+Depois de incluirmos nosso seletor, basta adicionarmos a propriedade que desejarmos para estilizar nosso elemento. Algumas delas são:
+
+- `color` → Define a cor da fonte dos textos  presente no conteúdo do elemento;
+- `font-size` → Define o tamanho da fonte dos textos presentes no conteúdo do elemento;
+- `background` → Define toda a estilização do "pano de fundo" do conteúdo do elemento;
+- `font-family` → Define qual a fonte será no conteúdo daquele elemento.
+
+Temos inúmeras outras propriedades que podem ser encontradas facilmente em: 
+
+[Referência de CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS/Reference)
+
+### Praticando IV
+
+```markdown
+Através do codepen.io...
+
+- Estilizar 2 parágrafos, alterando o background de um e a cor de outro.
+
+Regras: Deve ser adicionado apenas 1 estilo para cada páragrafo.
+
+> Sugestão: Definir um id para cada um dos elementos e utilizar como seletor.
+```
+
+Resolução:
+
+[https://codepen.io/gustavo-flor/pen/KKaKgBQ](https://codepen.io/gustavo-flor/pen/KKaKgBQ)
+
+## A Cascata
+
+E ai está o significado do "Cascading" no acrônimo de CSS, todo o estilo que declaramos no CSS é passado para seus elementos filhos, como uma "cascata" de estilos, por exemplo:
+
+```html
+<!-- Documento HTML -->
+<section>
+	Parágrafo bem maneiro
+	<div>
+		<p>Eu sou outro texto</p>
+	</div>
+</section>
+```
+
+```css
+/* Documento CSS */
+section {
+	color: blue;
+}
+```
+
+Estamos declarando no CSS que o elemento `section` terá seus textos com a cor azul, porém devido ao "Cascading", elementos filhos como o `p` também receberão a estilização.
+
+## Como integrar o CSS com o HTML
+
+Podemos escrever o CSS diretamente no HTML através da tag `<style>` adicionando ela dentro do `<head>` do nosso documento, exemplo:
+
+```html
+<head>
+	<style>
+		h1 {
+			color: red;
+		}
+	</style>
+</head>
+<body>...</body>
+```
+
+Porém, essa não é a forma mais recomendada e então temos a opção de separar o CSS em um arquivo diferente e depois importar no nosso HTML.
+
+### Praticando V
+
+```markdown
+Utilizando o modelo `inicial` disponibilizado...
+
+- Usar a tag `<link>` dentro do `<head>` para fazer o import do arquivos de estilo `style.css`
+
+> Uso da tag: <link rel="stylesheet" href="CAMINHO PARA O ARQUIVO">
+```
+
+## Conclusão
+
+Através dessa pequena trilha podemos entender que o HTML em conjunto com o CSS é uma ferramenta muito importante na construção de páginas web.
+
+## Próximos passos
+
+- Acessar o site [https://app.rocketseat.com.br/discover](https://app.rocketseat.com.br/discover) ;
+- Completar o cadastro e cumprir os guias estelares de HTML e CSS;
