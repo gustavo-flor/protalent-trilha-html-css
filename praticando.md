@@ -1,5 +1,5 @@
 # Mão na massa e bora praticar!
-Dentro de `./praticando` temos todos os desafios com suas resoluções para caso tenha alguma dificuldade.
+Dentro de `./praticando` temos todos os desafios com seus itens inicias e resoluções para caso tenha alguma dificuldade.
 
 ---
 
